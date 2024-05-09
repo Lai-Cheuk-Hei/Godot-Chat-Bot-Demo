@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3y8d02ows5wj"]
+
+[ext_resource type="Script" path="res://test.gd" id="1_6g1q0"]
+[ext_resource type="PackedScene" uid="uid://c6yxgd8jjdn3l" path="res://addons/textify_-_speech2text_[huggingface_whisper_api_wrapper]/textify.tscn" id="2_ic5qa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkqb1"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6g1q0")
+
+[node name="Textify" parent="." instance=ExtResource("2_ic5qa")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SendButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 174.0
+offset_top = 190.0
+offset_right = 296.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Send
+"
+
+[node name="TalkButton2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 514.0
+offset_right = 221.0
+offset_bottom = 565.0
+text = "Talk
+(Hold)"
+
+[node name="TalkButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = 190.0
+offset_right = -229.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Talk
+(Toggle)
+"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = 190.0
+offset_right = 163.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 51.0
+offset_right = 872.0
+offset_bottom = 498.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_qkqb1")
+text = "forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen forsen "
+autowrap_mode = 2
+
+[node name="MicSelect" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 582.0
+offset_right = 347.0
+offset_bottom = 634.0
+
+[connection signal="loading" from="Textify" to="." method="_on_textify_loading"]
+[connection signal="received" from="Textify" to="." method="_on_textify_received"]
+[connection signal="pressed" from="SendButton" to="." method="_on_send_button_pressed"]
+[connection signal="button_down" from="TalkButton2" to="." method="_on_talk_button_2_button_down"]
+[connection signal="button_up" from="TalkButton2" to="." method="_on_talk_button_2_button_up"]
+[connection signal="pressed" from="TalkButton" to="." method="_on_talk_button_pressed"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="item_selected" from="MicSelect" to="." method="_on_mic_select_item_selected"]
